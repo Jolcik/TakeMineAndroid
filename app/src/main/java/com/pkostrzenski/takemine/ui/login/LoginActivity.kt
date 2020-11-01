@@ -8,8 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.pkostrzenski.takemine.R
 import com.pkostrzenski.takemine.ui.base.BaseActivity
 import com.pkostrzenski.takemine.ui.city_chooser.CityChooserActivity
-import com.plsbenice.dic.ui.login.LoginViewModel
-import com.plsbenice.dic.ui.register.RegisterActivity
+import com.pkostrzenski.takemine.ui.register.RegisterActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseActivity() {

@@ -3,4 +3,11 @@
     <string name="dont_have_account">Nie masz konta?</string>
     <string name="register">Zarejestruj się</string>
     <string name="login">Zaloguj się</string>
+    <string name="email_already_taken">Ten adres e-mail jest już zajęty!</string>
+    <string name="connection_error">Błąd połączenia!</string>
+    <string name="incorrect_email">Nieprawidłowa struktura adresu e-mail!</string>
+    <string name="invalid_password_blank">Hasło jest puste!</string>
+    <string name="invalid_password_different">Hasła są różne!</string>
+    <string name="invalid_password_too_short">Hasło powinno mieć co najmniej 8 znaków</string>
+    <string name="provide_correct_email_and_password">Podaj prawidłowy adres e-mail oraz hasło</string>
 </resources>

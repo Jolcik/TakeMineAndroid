@@ -1,12 +1,12 @@
-package com.plsbenice.dic.ui.login
+package com.pkostrzenski.takemine.ui.login
 
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.plsbenice.dic.R
+import com.pkostrzenski.takemine.R
 import com.pkostrzenski.takemine.ui.base.BaseViewModel
-import com.plsbenice.dic.util.EmailValidator
+import com.pkostrzenski.takemine.utils.EmailValidator
 import kotlinx.coroutines.launch
 
 class LoginViewModel(application: Application) : BaseViewModel(application) {
