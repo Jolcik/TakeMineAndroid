@@ -10,4 +10,12 @@
     <string name="invalid_password_different">Hasła są różne!</string>
     <string name="invalid_password_too_short">Hasło powinno mieć co najmniej 8 znaków</string>
     <string name="provide_correct_email_and_password">Podaj prawidłowy adres e-mail oraz hasło</string>
+    <string name="obtain_title">Odbieraj</string>
+    <string name="obtain_description">Odbieraj wciąż przydatne i ładne przedmioty, których inni już nie potrzebują. Może nowa kanapa od sąsiadów?</string>
+    <string name="give_away_title">Oddawaj</string>
+    <string name="give_away_description">Oddaj rzeczy, których już nie używasz zamiast jest wyrzucać. Stare krzesło w piwnicy może zaoszczędzić pobliskiemu studentowi bólu pleców!</string>
+    <string name="take_action_title">Zrób coś!</string>
+    <string name="take_action_description">Działaj małymi krokami przeciwko powszechnemu marnotrastwu i promuj społeczny recykling</string>
+    <string name="next">NEXT</string>
+    <string name="get_started">GET STARTED</string>
 </resources>
