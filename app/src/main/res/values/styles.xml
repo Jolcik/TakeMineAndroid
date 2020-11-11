@@ -15,4 +15,8 @@
         <item name="android:statusBarColor">@color/colorAccent</item>
     </style>
 
+    <style name="EditTextStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+    </style>
+
 </resources>
