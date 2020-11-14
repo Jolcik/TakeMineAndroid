@@ -16,7 +16,19 @@
     <string name="give_away_description">Oddaj rzeczy, których już nie używasz zamiast jest wyrzucać. Stare krzesło w piwnicy może zaoszczędzić pobliskiemu studentowi bólu pleców!</string>
     <string name="take_action_title">Zrób coś!</string>
     <string name="take_action_description">Działaj małymi krokami przeciwko powszechnemu marnotrastwu i promuj społeczny recykling</string>
-    <string name="next">NEXT</string>
-    <string name="get_started">GET STARTED</string>
+    <string name="next">DALEJ</string>
+    <string name="get_started">ZACZYNAJMY!</string>
     <string name="choose_city">Wybierz miasto</string>
+    <string name="skip">POMIŃ</string>
+    <string name="no_products_text">Nie znaleziono żadnych przedmiotów</string>
+    <string name="nav_header_title">Tytuł</string>
+    <string name="nav_header_subtitle">Podtytuł</string>
+    <string name="create_account">Utwórz konto</string>
+    <string name="email_hint">Adres e-mail</string>
+    <string name="password_hint">Hasło</string>
+    <string name="confirm_password_hint">Potwierdź hasło</string>
+    <string name="register_button">ZAREJESTRUJ SIĘ</string>
+    <string name="menu_home">Strona główna</string>
+    <string name="menu_history">Twoja historia</string>
+    <string name="menu_about">O nas</string>
 </resources>

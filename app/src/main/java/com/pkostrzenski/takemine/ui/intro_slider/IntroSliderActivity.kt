@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.pkostrzenski.takemine.R
 import com.pkostrzenski.takemine.ui.login.LoginActivity
+import com.pkostrzenski.takemine.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_intro_slider.*
 
 class IntroSliderActivity : AppCompatActivity() {
@@ -52,7 +53,7 @@ class IntroSliderActivity : AppCompatActivity() {
     }
 
     private fun navigateFurther(){
-        startActivity(Intent(this, LoginActivity::class.java))
+        startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
 

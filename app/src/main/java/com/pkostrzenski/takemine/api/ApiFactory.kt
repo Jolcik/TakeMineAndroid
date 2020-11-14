@@ -5,7 +5,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 object ApiFactory {
 
@@ -33,4 +32,7 @@ object ApiFactory {
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
 
+    val usersApi = retrofit().create(UsersApi::class.java)
+    val citiesApi = retrofit().create(CitiesApi::class.java)
+    val productsApi = retrofit().create(ProductsApi::class.java)
 }

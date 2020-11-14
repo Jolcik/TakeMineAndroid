@@ -29,4 +29,8 @@
 
     </style>
 
+    <style name="CardViewButtonStyle">
+        <item name="cardBackgroundColor">@color/colorAccent</item>
+    </style>
+
 </resources>

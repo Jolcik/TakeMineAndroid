@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.pkostrzenski.takemine.R
 import com.pkostrzenski.takemine.models.City
 import com.pkostrzenski.takemine.ui.base.BaseActivity
+import com.pkostrzenski.takemine.ui.intro_slider.IntroSliderActivity
 import kotlinx.android.synthetic.main.activity_city_chooser.*
 
 class CityChooserActivity : BaseActivity() {
@@ -85,9 +86,9 @@ class CityChooserActivity : BaseActivity() {
     }
 
     private fun navigateToMainAndRestartActivities(){
-//        val intent = Intent(this, )
-//        startActivity(intent)
-//        finishAffinity()
+        val intent = Intent(this, IntroSliderActivity::class.java)
+        startActivity(intent)
+        finishAffinity()
     }
 
     companion object {
