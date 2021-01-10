@@ -4,11 +4,16 @@ import com.pkostrzenski.takemine.api.ApiFactory
 import com.pkostrzenski.takemine.api.Result
 import com.pkostrzenski.takemine.api.request_models.AuthenticateRequest
 import com.pkostrzenski.takemine.api.request_models.RegisterRequest
+import com.pkostrzenski.takemine.api.request_models.RegisterResponse
 import com.pkostrzenski.takemine.models.City
+import com.pkostrzenski.takemine.models.Picture
 import com.pkostrzenski.takemine.models.Product
 import com.pkostrzenski.takemine.models.User
 import com.pkostrzenski.takemine.utils.CacheSaver
 import com.pkostrzenski.takemine.utils.SharedPreferencesSaver
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 
 object MainRepository : RepositoryDao, BaseRepository(){
@@ -36,6 +41,7 @@ object MainRepository : RepositoryDao, BaseRepository(){
                 is Result.Success -> {
                     apiFactory.token = it.data.token
                     userId = it.data.id
+                    saver.saveToken(it.data.token)
                     true
                 }
                 is Result.Error -> false
@@ -51,6 +57,7 @@ object MainRepository : RepositoryDao, BaseRepository(){
                 is Result.Success -> {
                     apiFactory.token = it.data.token
                     userId = it.data.id
+                    saver.saveToken(it.data.token)
                     true
                 }
                 is Result.Error -> false
@@ -82,6 +89,15 @@ object MainRepository : RepositoryDao, BaseRepository(){
             safeApiCall {
                 productsApi.getProductsByCityId(currentCity!!.id).await()
             }
+        }
+    }
+
+    override suspend fun uploadPhoto(photo: ByteArray): Picture? {
+        val requestFile = RequestBody.create("image/jpeg".toMediaTypeOrNull(), photo)
+        val body = MultipartBody.Part.createFormData("file", "picture.jpg", requestFile)
+
+        return safeApiCall {
+            productsApi.uploadPicture(body).await()
         }
     }
 }

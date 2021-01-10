@@ -1,6 +1,7 @@
 package com.pkostrzenski.takemine.repository
 
 import com.pkostrzenski.takemine.models.City
+import com.pkostrzenski.takemine.models.Picture
 import com.pkostrzenski.takemine.models.Product
 import com.pkostrzenski.takemine.models.User
 
@@ -13,4 +14,5 @@ interface RepositoryDao {
     fun setCurrentCity(city: City)
     suspend fun getAllCities(): List<City>?
     suspend fun getProductsFromCity(): List<Product>?
+    suspend fun uploadPhoto(photo: ByteArray): Picture?
 }

@@ -7,5 +7,6 @@ data class Product(
     val time: String,
     val date: String,
     val itemType: ItemType,
+    val pictures: Set<Picture>,
     val buyer: User?
 )

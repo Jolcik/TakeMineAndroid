@@ -29,7 +29,6 @@ class IntroSliderActivity : AppCompatActivity() {
 
         viewPager.adapter = adapter
         tabLayout.setupWithViewPager(viewPager)
-        window.statusBarColor = resources.getColor(android.R.color.holo_blue_bright)
         sliderNextButton.setOnClickListener {
             if(viewPager.currentItem < adapter.count - 1)
                 viewPager.currentItem += 1
@@ -53,7 +52,7 @@ class IntroSliderActivity : AppCompatActivity() {
     }
 
     private fun navigateFurther(){
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, LoginActivity::class.java))
         finish()
     }
 

@@ -1,6 +1,7 @@
 package com.pkostrzenski.takemine.ui.main
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -44,8 +45,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         supportActionBar?.apply {
             setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp)
             setDisplayHomeAsUpEnabled(true)
-            title = "Products"
-            titleColor = android.R.color.white
+            title = "Wystawione przedmioty"
         }
     }
 
@@ -85,5 +85,16 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             onNavigationItemSelected(navigationView.menu.findItem(R.id.nav_home))
         else
             super.onBackPressed()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            android.R.id.home -> {
+                drawerLayout.openDrawer(Gravity.START)
+                return true
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 }

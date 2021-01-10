@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:singleLine="true"
-                android:text="piotr.kostrzenski@gmail.com" />
+                android:text="test@wp.pl" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -58,6 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textPassword|text"
+                android:text="12345678"
                 android:singleLine="true" />
 
         </com.google.android.material.textfield.TextInputLayout>

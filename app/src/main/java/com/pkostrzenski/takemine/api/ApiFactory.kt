@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiFactory {
 
-    private const val URL = "http://192.168.8.126:8080"
+    const val URL = "http://192.168.8.126:8080"
 
     var token: String? = null
 

@@ -1,13 +1,12 @@
 package com.pkostrzenski.takemine.api
 
 import com.pkostrzenski.takemine.models.Category
+import com.pkostrzenski.takemine.models.Picture
 import com.pkostrzenski.takemine.models.Product
 import kotlinx.coroutines.Deferred
+import okhttp3.MultipartBody
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface ProductsApi {
 
@@ -41,4 +40,8 @@ interface ProductsApi {
 
     @POST("/api/products/{productId}/buy")
     fun buyProduct(): Deferred<Response<Boolean>>
+
+    @Multipart
+    @POST("/api/pictures")
+    fun uploadPicture(@Part picture: MultipartBody.Part): Deferred<Response<Picture>>
 }

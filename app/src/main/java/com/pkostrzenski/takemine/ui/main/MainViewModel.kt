@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.pkostrzenski.takemine.R
 import com.pkostrzenski.takemine.ui.base.BaseViewModel
+import com.pkostrzenski.takemine.utils.SharedPreferencesSaver
 
 class MainViewModel(application: Application) : BaseViewModel(application) {
 
@@ -21,7 +22,7 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
         when(itemId){
             R.id.nav_home -> mutableNavigateToMain.value = true
             R.id.nav_history -> mutableNavigateToBalance.value = true
-            R.id.nav_about -> mutableNavigateToAbout.value = true
+            R.id.nav_about -> {mutableNavigateToAbout.value = true; SharedPreferencesSaver.clear()}
         }
     }
 }

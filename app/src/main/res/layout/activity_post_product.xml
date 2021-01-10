@@ -9,7 +9,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <ProgressBar
-        android:id="@+id/post_product_progress_bar"
+        android:id="@+id/postProductProgressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
-        android:id="@+id/post_product_scroll_view"
+        android:id="@+id/postProductScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -139,6 +139,40 @@
                     android:singleLine="true" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Załącz zdjęcia"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/addPhotoIcon"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="8dp"
+                app:srcCompat="@drawable/add_icon2" />
+
+            <TextView
+                android:id="@+id/addPhotoCounter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:visibility="visible"
+                tools:text="Dodano zdjęć: 3" />
+
+            <TextView
+                android:id="@+id/add_photo_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Kliknij, aby dodać zdjęcie"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/product_description_title"

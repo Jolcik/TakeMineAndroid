@@ -28,7 +28,7 @@ class LoginActivity : BaseActivity() {
         model = ViewModelProvider(this).get(LoginViewModel::class.java)
         model.message.observe(this, Observer { it?.run { showToast(getString(it)) } })
         model.uiEnabled.observe(this, Observer { enableViews(it ?: true) })
-        model.navigateToLogged.observe(this, Observer { if(it == true) navigateToLoggedActivity() })
+        model.navigateToLogged.observe(this, Observer { if(it == true) navigateToCityChooserActivity() })
         model.navigateToRegister.observe(this, Observer { if(it == true) navigateToRegisterActivity() })
     }
 
@@ -46,7 +46,7 @@ class LoginActivity : BaseActivity() {
         progressBar.visibility = if(enabled) View.GONE else View.VISIBLE
     }
 
-    private fun navigateToLoggedActivity(){
+    private fun navigateToCityChooserActivity(){
         val intent = Intent(this, CityChooserActivity::class.java)
         startActivity(intent)
         finish()

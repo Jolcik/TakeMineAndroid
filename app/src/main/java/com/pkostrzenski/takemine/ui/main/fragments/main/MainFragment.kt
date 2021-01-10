@@ -51,11 +51,14 @@ class MainFragment : BaseFragment() {
     }
 
     private fun setupRecyclerView(products: List<Product>){
-        val linearLayoutManager = LinearLayoutManager(activity)
-        recyclerView.layoutManager = linearLayoutManager
-        recyclerView.adapter = ProductRecyclerAdapter(products, context!!) {  productId ->
-            model.productClicked(productId)
+        if (products.isNotEmpty()) {
+            val linearLayoutManager = LinearLayoutManager(activity)
+            recyclerView.layoutManager = linearLayoutManager
+            recyclerView.adapter = ProductRecyclerAdapter(products, context!!) {  productId ->
+                model.productClicked(productId)
+            }
         }
+        else noGroupsText.visibility = View.VISIBLE
     }
 
     private fun setViewsVisible(visible: Boolean){

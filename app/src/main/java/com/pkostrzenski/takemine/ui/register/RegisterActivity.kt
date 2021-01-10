@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.pkostrzenski.takemine.R
 import com.pkostrzenski.takemine.ui.base.BaseActivity
 import com.pkostrzenski.takemine.ui.city_chooser.CityChooserActivity
+import com.pkostrzenski.takemine.ui.intro_slider.IntroSliderActivity
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : BaseActivity() {

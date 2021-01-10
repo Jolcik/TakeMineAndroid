@@ -21,7 +21,7 @@
     <string name="choose_city">Wybierz miasto</string>
     <string name="skip">POMIŃ</string>
     <string name="no_products_text">Nie znaleziono żadnych przedmiotów</string>
-    <string name="nav_header_title">Tytuł</string>
+    <string name="nav_header_title">TakeMine</string>
     <string name="nav_header_subtitle">Podtytuł</string>
     <string name="create_account">Utwórz konto</string>
     <string name="email_hint">Adres e-mail</string>
@@ -31,4 +31,5 @@
     <string name="menu_home">Strona główna</string>
     <string name="menu_history">Twoja historia</string>
     <string name="menu_about">O nas</string>
+    <string name="no_photos_text">Brak zdjęcia</string>
 </resources>
