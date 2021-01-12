@@ -1,12 +1,12 @@
 package com.pkostrzenski.takemine.repository
 
-import com.pkostrzenski.takemine.models.City
-import com.pkostrzenski.takemine.models.Picture
-import com.pkostrzenski.takemine.models.Product
-import com.pkostrzenski.takemine.models.User
+import com.pkostrzenski.takemine.models.*
 
 
 interface RepositoryDao {
+
+    var locations: Set<Location>
+
     suspend fun authenticate(email: String, password: String): Boolean?
     suspend fun register(email: String, password: String): Boolean?
     suspend fun getUserInfo(): User?
@@ -15,4 +15,9 @@ interface RepositoryDao {
     suspend fun getAllCities(): List<City>?
     suspend fun getProductsFromCity(): List<Product>?
     suspend fun uploadPhoto(photo: ByteArray): Picture?
+    fun clearLocations()
+    fun addLocation(location: Location)
+    suspend fun getCategories(): List<Category>?
+    suspend fun getItemTypes(category: Category): List<ItemType>?
+    suspend fun postProduct(product: Product): Product?
 }

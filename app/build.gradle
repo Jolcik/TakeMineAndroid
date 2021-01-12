@@ -79,4 +79,7 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:1.1.0"
 
     implementation 'com.github.bumptech.glide:glide:3.8.0'
+
+    // location picker
+    implementation 'com.schibstedspain.android:leku:8.0.0'
 }

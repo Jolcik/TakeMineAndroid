@@ -5,10 +5,7 @@ import com.pkostrzenski.takemine.api.Result
 import com.pkostrzenski.takemine.api.request_models.AuthenticateRequest
 import com.pkostrzenski.takemine.api.request_models.RegisterRequest
 import com.pkostrzenski.takemine.api.request_models.RegisterResponse
-import com.pkostrzenski.takemine.models.City
-import com.pkostrzenski.takemine.models.Picture
-import com.pkostrzenski.takemine.models.Product
-import com.pkostrzenski.takemine.models.User
+import com.pkostrzenski.takemine.models.*
 import com.pkostrzenski.takemine.utils.CacheSaver
 import com.pkostrzenski.takemine.utils.SharedPreferencesSaver
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -27,6 +24,8 @@ object MainRepository : RepositoryDao, BaseRepository(){
     private var currentCity: City? = null
 
     private val saver: CacheSaver = SharedPreferencesSaver
+
+    override var locations: Set<Location> = setOf()
 
     init {
         currentCity = saver.retrieveCity()
@@ -92,6 +91,18 @@ object MainRepository : RepositoryDao, BaseRepository(){
         }
     }
 
+    override suspend fun getCategories(): List<Category>? {
+        return safeApiCall { productsApi.getAllCategories().await() }
+    }
+
+    override suspend fun getItemTypes(category: Category): List<ItemType>? {
+        return safeApiCall { productsApi.getItemTypesByCategoryId(category.id).await() }
+    }
+
+    override suspend fun postProduct(product: Product): Product? {
+        return safeApiCall { productsApi.postProduct(product).await() }
+    }
+
     override suspend fun uploadPhoto(photo: ByteArray): Picture? {
         val requestFile = RequestBody.create("image/jpeg".toMediaTypeOrNull(), photo)
         val body = MultipartBody.Part.createFormData("file", "picture.jpg", requestFile)
@@ -99,5 +110,13 @@ object MainRepository : RepositoryDao, BaseRepository(){
         return safeApiCall {
             productsApi.uploadPicture(body).await()
         }
+    }
+
+    override fun clearLocations() {
+        locations = setOf()
+    }
+
+    override fun addLocation(location: Location) {
+        locations = locations.plus(location)
     }
 }

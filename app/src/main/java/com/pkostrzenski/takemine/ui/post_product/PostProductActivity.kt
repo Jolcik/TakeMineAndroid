@@ -1,26 +1,27 @@
 package com.pkostrzenski.takemine.ui.post_product
 
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.widget.DatePicker
-import android.widget.TimePicker
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.ArrayAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.pkostrzenski.takemine.R
+import com.pkostrzenski.takemine.models.Category
+import com.pkostrzenski.takemine.models.ItemType
+import com.pkostrzenski.takemine.models.Location
 import com.pkostrzenski.takemine.models.Picture
+import com.pkostrzenski.takemine.ui.location_picker.LocationPickerWrapperActivity
 import com.pkostrzenski.takemine.ui.photo_picker.PhotoPickerBaseActivity
 import kotlinx.android.synthetic.main.activity_post_product.*
-import java.util.*
 
-class PostProductActivity : PhotoPickerBaseActivity(),
-    DatePickerDialog.OnDateSetListener,
-    TimePickerDialog.OnTimeSetListener
-{
+
+class PostProductActivity : PhotoPickerBaseActivity() {
 
     private lateinit var model: PostProductViewModel
 
@@ -32,59 +33,23 @@ class PostProductActivity : PhotoPickerBaseActivity(),
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         initModel()
-        setupPickers()
         addPhotoIcon.setOnClickListener { model.uploadPhotoClicked() }
+        addLocationIcon.setOnClickListener { model.pickLocationClicked() }
+        postProductApplyButton.setOnClickListener {
+            model.postProductClicked(productNameInput.text.toString(), productDescriptionInput.text.toString())
+        }
     }
 
     private fun initModel() {
         model = ViewModelProvider(this).get(PostProductViewModel::class.java)
         model.navigateToPhotoPicker.observe(this, Observer { if(it == true) pickPhoto() })
+        model.navigateToLocationPicker.observe(this, Observer { if(it == true) navigateToLocationPicker() })
         model.navigateToMain.observe(this, Observer { finish() })
         model.uiEnabled.observe(this, Observer { enableViews(it ?: true) })
-        model.pictures.observe(this, Observer { updatePictures(it ?: listOf()) })
-    }
-
-    private fun setupPickers(){
-        product_date_input.setOnClickListener { openDatePicker() }
-        product_time_input.setOnClickListener { openTimePicker() }
-    }
-
-    // we chose the date
-    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        // show it inside the input
-        val dayString = String.format("%02d", dayOfMonth)
-        val monthString = String.format("%02d", month + 1)
-        product_date_input.setText("$dayString.$monthString.$year")
-
-        // if the next picker is empty, focus on it -> provides consequent flow
-        if(product_time_input.text.isNullOrBlank())
-            openTimePicker()
-    }
-
-    // we chose the time
-    override fun onTimeSet(view: TimePicker?, hour: Int, minute: Int) {
-        // show it inside the input
-        val hourString = String.format("%02d", hour)
-        val minuteString = String.format("%02d", minute)
-        product_time_input.setText("$hourString:$minuteString")
-    }
-
-    // utils functions - showing the pickers, closing the keyboard and going back to previous activity
-    private fun openDatePicker(){
-        val mYear = Calendar.getInstance().get(Calendar.YEAR)
-        val mMonth = Calendar.getInstance().get(Calendar.MONTH)
-        val mDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-
-        val datePickerDialog = DatePickerDialog(this, this, mYear, mMonth, mDay)
-        datePickerDialog.datePicker.minDate = System.currentTimeMillis()
-        datePickerDialog.show()
-    }
-
-    private fun openTimePicker(){
-        val mHour = Calendar.getInstance().get(Calendar.HOUR)
-        val mMinute = Calendar.getInstance().get(Calendar.MINUTE)
-        val timePickerDialog = TimePickerDialog(this, this, mHour, mMinute, true)
-        timePickerDialog.show()
+        model.categories.observe(this, Observer { if (it != null) fillCategories(it) })
+        model.itemTypes.observe(this, Observer { if (it != null) fillItemTypes(it) })
+        model.pictures.observe(this, Observer { updatePictures(it ?: setOf()) })
+        model.locations.observe(this, Observer { if (it != null) updateLocations(it) })
     }
 
     private fun enableViews(enabled: Boolean) {
@@ -92,8 +57,56 @@ class PostProductActivity : PhotoPickerBaseActivity(),
         postProductProgressBar.visibility = if(enabled) View.GONE else View.VISIBLE
     }
 
-    private fun updatePictures(pictures: List<Picture>) {
+    private fun fillCategories(categories: List<Category>) {
+        val adapter = ArrayAdapter<String>(
+            this, android.R.layout.select_dialog_item, categories.map { it.name }
+        )
+        categorySpinner.adapter = adapter
+        categorySpinner.onItemSelectedListener = object : OnItemSelectedListener {
+            override fun onItemSelected(
+                parentView: AdapterView<*>?, selectedItemView: View, position: Int, id: Long
+            ) {
+                model.categoryPicked(categories[position])
+            }
+            override fun onNothingSelected(parentView: AdapterView<*>?) {}
+        }
+        model.categoryPicked(categories.first())
+    }
+
+    private fun fillItemTypes(itemTypes: List<ItemType>) {
+        val adapter = ArrayAdapter<String>(
+            this, android.R.layout.select_dialog_item, itemTypes.map { it.name }
+        )
+        itemTypeSpinner.adapter = adapter
+        itemTypeSpinner.onItemSelectedListener = object : OnItemSelectedListener {
+            override fun onItemSelected(
+                parentView: AdapterView<*>?, selectedItemView: View, position: Int, id: Long
+            ) {
+                model.itemTypePicked(itemTypes[position])
+            }
+            override fun onNothingSelected(parentView: AdapterView<*>?) {}
+        }
+    }
+
+    private fun updatePictures(pictures: Set<Picture>) {
         addPhotoCounter.text = "Dodano zdjęć: ${pictures.size}"
+    }
+
+    private fun updateLocations(locations: Set<Location>) {
+        if (locations.isNotEmpty()) {
+            addLocationIcon.visibility = View.GONE
+            addAnotherLocationIcon.visibility = View.VISIBLE
+            addAnotherLocationText.visibility = View.VISIBLE
+            var locationsString = ""
+            locations.forEach { locationsString += "- ${it.name.slice(0..32)}...\n" }
+
+            addressesList.text = locationsString
+        }
+    }
+
+    private fun navigateToLocationPicker() {
+        val intent = Intent(this, LocationPickerWrapperActivity::class.java)
+        startActivityForResult(intent, LOCATION_REQUEST_CODE)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -105,11 +118,18 @@ class PostProductActivity : PhotoPickerBaseActivity(),
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+        if (requestCode == LOCATION_REQUEST_CODE && resultCode == Activity.RESULT_OK)
+            model.gotActivityOkResult()
+
         if(requestCode == PICK_IMAGE_REQUEST_CODE && resultCode == RESULT_OK){
             convertResultDataToByteArray(data)?.let { photo ->
                 model.uploadPhoto(photo)
             } ?: showToast("Wystąpił lokalny błąd, spróbuj ponownie!")
         }
+    }
+
+    companion object {
+        val LOCATION_REQUEST_CODE = 1234
     }
 
 }

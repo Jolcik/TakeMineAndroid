@@ -1,6 +1,7 @@
 package com.pkostrzenski.takemine.ui.main.fragments.main
 
 import android.content.Context
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -17,16 +18,15 @@ class ProductViewHolder(v: View): RecyclerView.ViewHolder(v) {
     fun bindGroup(product: Product, clickListener: (Int) -> Unit, context: Context){
         view.apply {
             productTitle.text = product.name
-            addressTitle.text = product.address
+            addressTitle.text = product.locations.first().name
             mainCardview.setOnClickListener{
-                clickListener(product.id)
+                clickListener(product.id!!)
             }
         }
 
         if (product.pictures.isNotEmpty())
             Glide.with(context)
                 .load("${baseUrl}/api/pictures/${product.pictures.first().path}")
-                .placeholder(android.R.color.darker_gray)
                 .into(view.productImage)
         else view.mainCardview.noPhotosText.visibility = View.VISIBLE
     }

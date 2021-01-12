@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+    <color name="leku_black_20_transparent">#33000000</color>
+    <color name="leku_blackish">#171d20</color>
+    <color name="leku_mid_grey">#85969f</color>
+    <color name="leku_search_background">#0000</color>
+    <color name="leku_soft_grey">#ECEEEF</color>
+    <color name="leku_strong_grey">#50545A</color>
+    <color name="leku_white">#FFFFFF</color>
+    <color name="leku_white_alpha">#F2FFFFFF</color>
+    <dimen name="leku_gap">8dp</dimen>
+    <dimen name="leku_information_bottom_margin">24dp</dimen>
+    <string name="leku_accessibility_remove_current_location">Usuń obecną lokalizację</string>
+    <string name="leku_coordinates">Współrzędne</string>
+    <string name="leku_latitude">Lat</string>
+    <string name="leku_load_location_error">Coś poszło nie tak, spróbuj ponownie...</string>
+    <string name="leku_longitude">Lng</string>
+    <string name="leku_network_resource">Internet</string>
+    <string name="leku_no_geocoder_available">Usługa nie jest dostępna</string>
+    <string name="leku_no_search_results">Nie znaleziono żadnych wyników!</string>
+    <string name="leku_search_hint">Szukaj</string>
+    <string name="leku_title_activity_location_picker" ns1:ignore="UnusedResources">Wybierz lokalizację</string>
+    <string name="leku_toolbar_action_voice_title">Głos</string>
+    <string name="leku_unknown_location">Nieznana lokalizacja</string>
+    <string name="leku_use_this_location">Użyj tej lokalizacji</string>
+    <string name="leku_voice_search_extra_language">pl-PL</string>
+    <string name="leku_voice_search_promp">Wyszukaj głosem...</string>
+</resources>

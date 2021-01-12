@@ -1,6 +1,7 @@
 package com.pkostrzenski.takemine.api
 
 import com.pkostrzenski.takemine.models.Category
+import com.pkostrzenski.takemine.models.ItemType
 import com.pkostrzenski.takemine.models.Picture
 import com.pkostrzenski.takemine.models.Product
 import kotlinx.coroutines.Deferred
@@ -29,7 +30,7 @@ interface ProductsApi {
     @GET("/api/categories/{categoryId}/item-types")
     fun getItemTypesByCategoryId(
         @Path("categoryId") categoryId: Int
-    ): Deferred<Response<List<Category>>>
+    ): Deferred<Response<List<ItemType>>>
 
 
     @POST("/api/products")
