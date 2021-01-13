@@ -1,5 +1,6 @@
 package com.pkostrzenski.takemine.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
 import android.view.MenuItem
@@ -12,6 +13,7 @@ import com.pkostrzenski.takemine.ui.base.BaseActivity
 import com.pkostrzenski.takemine.ui.main.fragments.about.AboutFragment
 import com.pkostrzenski.takemine.ui.main.fragments.history.HistoryFragment
 import com.pkostrzenski.takemine.ui.main.fragments.main.MainFragment
+import com.pkostrzenski.takemine.ui.product.ProductActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -31,6 +33,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         initModel()
         setupToolbar()
+
+        intent.getStringExtra(PRODUCT_ID_INTENT)?.let { id -> navigateToProduct(id.toInt()) }
     }
 
     private fun initModel(){
@@ -96,5 +100,15 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun navigateToProduct(productId: Int){
+        val intent = Intent(this, ProductActivity::class.java)
+        intent.putExtra("product_id", productId.toString())
+        startActivity(intent)
+    }
+
+    companion object {
+        val PRODUCT_ID_INTENT = "product_id"
     }
 }

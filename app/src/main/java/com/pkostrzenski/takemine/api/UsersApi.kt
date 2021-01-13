@@ -1,9 +1,6 @@
 package com.pkostrzenski.takemine.api
 
-import com.pkostrzenski.takemine.api.request_models.AuthenticateRequest
-import com.pkostrzenski.takemine.api.request_models.AuthenticateResponse
-import com.pkostrzenski.takemine.api.request_models.RegisterRequest
-import com.pkostrzenski.takemine.api.request_models.RegisterResponse
+import com.pkostrzenski.takemine.api.request_models.*
 import com.pkostrzenski.takemine.models.User
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
@@ -28,4 +25,9 @@ interface UsersApi {
     fun getUserInfo(
         @Path("userId") userId: Int
     ): Deferred<Response<User>>
+
+    @POST("/api/users/token")
+    fun addFirebaseToken(
+        @Body body: AddFirebaseTokenRequest
+    ): Deferred<Response<Boolean>>
 }

@@ -18,7 +18,8 @@ class ProductViewHolder(v: View): RecyclerView.ViewHolder(v) {
     fun bindGroup(product: Product, clickListener: (Int) -> Unit, context: Context){
         view.apply {
             productTitle.text = product.name
-            addressTitle.text = product.locations.first().name
+            if (product.locations.isNotEmpty())
+                addressTitle.text = product.locations.first().name
             mainCardview.setOnClickListener{
                 clickListener(product.id!!)
             }

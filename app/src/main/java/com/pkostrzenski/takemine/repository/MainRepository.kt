@@ -2,6 +2,7 @@ package com.pkostrzenski.takemine.repository
 
 import com.pkostrzenski.takemine.api.ApiFactory
 import com.pkostrzenski.takemine.api.Result
+import com.pkostrzenski.takemine.api.request_models.AddFirebaseTokenRequest
 import com.pkostrzenski.takemine.api.request_models.AuthenticateRequest
 import com.pkostrzenski.takemine.api.request_models.RegisterRequest
 import com.pkostrzenski.takemine.api.request_models.RegisterResponse
@@ -118,5 +119,9 @@ object MainRepository : RepositoryDao, BaseRepository(){
 
     override fun addLocation(location: Location) {
         locations = locations.plus(location)
+    }
+
+    override suspend fun addFirebaseToken(token: String): Boolean? {
+        return safeApiCall { usersApi.addFirebaseToken(AddFirebaseTokenRequest(token)).await() }
     }
 }
