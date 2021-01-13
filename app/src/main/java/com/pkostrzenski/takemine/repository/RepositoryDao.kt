@@ -20,5 +20,8 @@ interface RepositoryDao {
     suspend fun getCategories(): List<Category>?
     suspend fun getItemTypes(category: Category): List<ItemType>?
     suspend fun postProduct(product: Product): Product?
+    suspend fun getProduct(productId: Int): Product?
+    suspend fun buyProduct(productId: Int): User?
     suspend fun addFirebaseToken(token: String): Boolean?
+    suspend fun addNotifier(locations: Set<Location>, itemType: ItemType): Notifier?
 }

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.pkostrzenski.takemine.R
 
 import com.pkostrzenski.takemine.models.Product
+import com.pkostrzenski.takemine.ui.add_notifier.AddNotifierActivity
 import com.pkostrzenski.takemine.ui.base.BaseFragment
 import com.pkostrzenski.takemine.ui.post_product.PostProductActivity
 import com.pkostrzenski.takemine.ui.product.ProductActivity
@@ -33,10 +34,14 @@ class MainFragment : BaseFragment() {
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
+    override fun onResume() {
+        super.onResume()
+        model.fetchProducts()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        postProductButton.setOnClickListener {
-            model.postProductButtonClicked()
-        }
+        postProductButton.setOnClickListener { model.postProductButtonClicked() }
+        addNotifierButton.setOnClickListener { model.addNotifierButtonClicked() }
 
         super.onViewCreated(view, savedInstanceState)
     }
@@ -47,7 +52,8 @@ class MainFragment : BaseFragment() {
         model.uiEnabled.observe(this, Observer { setViewsVisible(it) })
         model.products.observe(this, Observer { it?.run { setupRecyclerView(it) } })
         model.navigateToProduct.observe(this, Observer { it?.run { navigateToProduct(it)} })
-        model.navigateToPostProduct.observe(this, Observer { it?.run { navigateToPostProduct(it) } })
+        model.navigateToPostProduct.observe(this, Observer { if (it == true) navigateToPostProduct() })
+        model.navigateToAddNotifier.observe(this, Observer { if (it == true) navigateToAddNotifier() })
     }
 
     private fun setupRecyclerView(products: List<Product>){
@@ -73,8 +79,13 @@ class MainFragment : BaseFragment() {
         activity?.startActivity(intent)
     }
 
-    private fun navigateToPostProduct(create: Boolean){
+    private fun navigateToPostProduct(){
         val intent = Intent(context, PostProductActivity::class.java)
+        activity?.startActivity(intent)
+    }
+
+    private fun navigateToAddNotifier() {
+        val intent = Intent(context, AddNotifierActivity::class.java)
         activity?.startActivity(intent)
     }
 }

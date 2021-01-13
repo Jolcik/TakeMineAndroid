@@ -30,11 +30,12 @@
     <string name="register_button">ZAREJESTRUJ SIĘ</string>
     <string name="menu_home">Strona główna</string>
     <string name="menu_history">Twoja historia</string>
-    <string name="menu_about">O nas</string>
+    <string name="menu_about">Wyloguj się</string>
     <string name="no_photos_text">Brak zdjęcia</string>
     <string name="no_location_provided">Nie podano lokalizacji!</string>
     <string name="no_hours_provided">Nie podano godzin dostępności</string>
     <string name="no_day_chosen">Nie wybrano żadnego dnia!</string>
     <string name="successfully_added_location">Pomyślnie dodano lokalizację!</string>
     <string name="successfully_added_product">Pomyślnie dodano nowy przedmiot!</string>
+    <string name="already_bought">Przedmiot już został kupiony!</string>
 </resources>

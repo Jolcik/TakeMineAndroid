@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "895603154193",
+    "project_id": "takemine-70ba6",
+    "storage_bucket": "takemine-70ba6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:895603154193:android:a29dc5b74d46f5aa1f00b0",
+        "android_client_info": {
+          "package_name": "com.pkostrzenski.takemine"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "895603154193-pf9115g4o8ud3egl819geafrv32qnseo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2W-88lEZqF1cqI1EHVAVPQUnLtGY19dI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "895603154193-pf9115g4o8ud3egl819geafrv32qnseo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

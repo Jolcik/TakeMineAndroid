@@ -14,16 +14,18 @@ class MainFragmentViewModel(application: Application): BaseViewModel(application
     private val mutableProducts = MutableLiveData<List<Product>>()
     private val mutableNavigateToPostProduct = MutableLiveData<Boolean>()
     private val mutableNavigateToProduct = MutableLiveData<Int>()
+    private val mutableNavigateToAddNotifier = MutableLiveData<Boolean>()
 
     val products: LiveData<List<Product>> = mutableProducts
     val navigateToPostProduct: LiveData<Boolean> = mutableNavigateToPostProduct
     val navigateToProduct: LiveData<Int> = mutableNavigateToProduct
+    val navigateToAddNotifier: LiveData<Boolean> = mutableNavigateToAddNotifier
 
     init {
         fetchProducts()
     }
 
-    private fun fetchProducts() = viewModelScope.launch {
+    fun fetchProducts() = viewModelScope.launch {
         disableUi()
 
         when(val fetchedProducts = repository.getProductsFromCity()) {
@@ -41,5 +43,9 @@ class MainFragmentViewModel(application: Application): BaseViewModel(application
 
     fun productClicked(productId: Int) {
         mutableNavigateToProduct.value = productId
+    }
+
+    fun addNotifierButtonClicked() {
+        mutableNavigateToAddNotifier.value = true
     }
 }

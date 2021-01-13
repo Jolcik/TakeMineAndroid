@@ -1,9 +1,6 @@
 package com.pkostrzenski.takemine.api
 
-import com.pkostrzenski.takemine.models.Category
-import com.pkostrzenski.takemine.models.ItemType
-import com.pkostrzenski.takemine.models.Picture
-import com.pkostrzenski.takemine.models.Product
+import com.pkostrzenski.takemine.models.*
 import kotlinx.coroutines.Deferred
 import okhttp3.MultipartBody
 import retrofit2.Response
@@ -40,7 +37,9 @@ interface ProductsApi {
 
 
     @POST("/api/products/{productId}/buy")
-    fun buyProduct(): Deferred<Response<Boolean>>
+    fun buyProduct(
+        @Path("productId") productId: Int
+    ): Deferred<Response<User>>
 
     @Multipart
     @POST("/api/pictures")

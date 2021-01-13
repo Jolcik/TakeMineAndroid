@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.pkostrzenski.takemine.api.ApiFactory
+import com.pkostrzenski.takemine.repository.MainRepository
 import com.pkostrzenski.takemine.ui.intro_slider.IntroSliderActivity
 import com.pkostrzenski.takemine.ui.main.MainActivity
 import com.pkostrzenski.takemine.utils.CacheSaver
@@ -20,6 +21,7 @@ class LauncherActivity : AppCompatActivity() {
 
         cacheSaver.retrieveToken()?.let {
             ApiFactory.token = it
+            MainRepository.userId = cacheSaver.retrieveUserId()?.toInt()
             navigateToActivity(MainActivity::class.java)
         } ?: navigateToActivity(IntroSliderActivity::class.java)
     }

@@ -21,7 +21,7 @@ object MainRepository : RepositoryDao, BaseRepository(){
     private val citiesApi = apiFactory.citiesApi
     private val productsApi = apiFactory.productsApi
 
-    private var userId: Int? = null
+    var userId: Int? = null
     private var currentCity: City? = null
 
     private val saver: CacheSaver = SharedPreferencesSaver
@@ -42,6 +42,7 @@ object MainRepository : RepositoryDao, BaseRepository(){
                     apiFactory.token = it.data.token
                     userId = it.data.id
                     saver.saveToken(it.data.token)
+                    saver.saveUserId(it.data.id.toString())
                     true
                 }
                 is Result.Error -> false
@@ -58,6 +59,7 @@ object MainRepository : RepositoryDao, BaseRepository(){
                     apiFactory.token = it.data.token
                     userId = it.data.id
                     saver.saveToken(it.data.token)
+                    saver.saveUserId(it.data.id.toString())
                     true
                 }
                 is Result.Error -> false
@@ -123,5 +125,17 @@ object MainRepository : RepositoryDao, BaseRepository(){
 
     override suspend fun addFirebaseToken(token: String): Boolean? {
         return safeApiCall { usersApi.addFirebaseToken(AddFirebaseTokenRequest(token)).await() }
+    }
+
+    override suspend fun addNotifier(locations: Set<Location>, itemType: ItemType): Notifier? {
+        return safeApiCall { usersApi.addNotifier(Notifier(User(userId!!, "", ""), locations, itemType)).await() }
+    }
+
+    override suspend fun getProduct(productId: Int): Product? {
+        return safeApiCall { productsApi.getProductById(productId).await() }
+    }
+
+    override suspend fun buyProduct(productId: Int): User? {
+        return safeApiCall { productsApi.buyProduct(productId).await() }
     }
 }

@@ -1,6 +1,7 @@
 package com.pkostrzenski.takemine.api
 
 import com.pkostrzenski.takemine.api.request_models.*
+import com.pkostrzenski.takemine.models.Notifier
 import com.pkostrzenski.takemine.models.User
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
@@ -30,4 +31,9 @@ interface UsersApi {
     fun addFirebaseToken(
         @Body body: AddFirebaseTokenRequest
     ): Deferred<Response<Boolean>>
+
+    @POST("/api/users/notifier")
+    fun addNotifier(
+        @Body body: Notifier
+    ): Deferred<Response<Notifier>>
 }

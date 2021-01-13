@@ -11,6 +11,7 @@ object SharedPreferencesSaver: CacheSaver {
     private const val PREF_NAME = "mobile-toilets-cache"
 
     private const val TOKEN_KEY = "token"
+    private const val USER_ID_KEY = "user_id"
     private const val CITY_KEY = "city"
 
     private val gson = Gson()
@@ -25,6 +26,10 @@ object SharedPreferencesSaver: CacheSaver {
     override fun saveToken(token: String) = save(token, TOKEN_KEY)
 
     override fun retrieveToken(): String? = retrieve(TOKEN_KEY, String::class.java) as String?
+
+    override fun saveUserId(id: String) = save(id, USER_ID_KEY)
+
+    override fun retrieveUserId(): String? = retrieve(USER_ID_KEY, String::class.java) as String?
 
     override fun saveCity(city: City) = save(city, CITY_KEY)
 
